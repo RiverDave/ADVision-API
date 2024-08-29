@@ -6,5 +6,6 @@ import (
 
 func main() {
 	server := api.NewServer()
+	server.SetUpRoutes()
 	server.Run()
 }
