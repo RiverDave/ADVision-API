@@ -20,6 +20,11 @@
 # Go workspace file
 go.work
 go.work.sum
+uploads/
 
 # env file
 .env
+
+*.jpeg
+*.jpg
+*.png

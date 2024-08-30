@@ -5,18 +5,20 @@ import (
 
 	"aipi/internal/api/handlers"
 
+	svc "aipi/internal/service"
+
 	"github.com/gin-gonic/gin"
 )
 
 type Server struct {
-	router *gin.Engine
-	// cfg *cfg
-	// TODO: Add config
+	router  *gin.Engine
+	service *svc.Service
 }
 
 func NewServer() *Server {
 	return &Server{
-		router: gin.Default(),
+		router:  gin.Default(),
+		service: svc.NewService(),
 	}
 }
 
@@ -28,6 +30,7 @@ func (s *Server) SetUpRoutes() {
 	})
 
 	s.router.GET("/checkhealth", handlers.CheckHealth)
+	s.router.POST("/upload", handlers.ProcessImage(s.service))
 }
 
 func (s *Server) Run() {
