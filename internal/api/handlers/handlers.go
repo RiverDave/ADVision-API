@@ -43,25 +43,8 @@ func ImageHandler(svc *svc.Service) gin.HandlerFunc {
 			return
 		}
 
-		// ext := filepath.Ext(file.Filename)
-		// if ext != ".jpg" && ext != ".jpeg" && ext != ".png" {
-		// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Only .jpg, .jpeg, and .png files are allowed"})
-		// 	return
-		// }
-		//
-		// // Generate a unique filename
-		// filename := fmt.Sprintf("%d%s", time.Now().UnixNano(), ext)
-		//
-		// if err := c.SaveUploadedFile(file, "uploads/"+filename); err != nil {
-		// 	c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save file"})
-		// 	return
-		// }
-
 		// call client
 
-		c.JSON(http.StatusOK, gin.H{
-			"message": "Image uploaded successfully",
-			"output":  res.Choices[0].Message,
-		})
+		c.JSON(http.StatusOK, res)
 	}
 }

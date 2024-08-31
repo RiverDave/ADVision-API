@@ -22,6 +22,7 @@ func NewServer() *Server {
 	}
 }
 
+// Register handlers
 func (s *Server) SetUpRoutes() {
 	s.router.GET("/", func(c *gin.Context) {
 		c.IndentedJSON(http.StatusOK, gin.H{
