@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"log"
 	"os"
 
@@ -8,8 +9,10 @@ import (
 	"github.com/sashabaranov/go-openai"
 )
 
+// Wrap all the server Service providers if any, right here
 type Service struct {
 	openai *openai.Client
+	// db... ?
 }
 
 func NewService() *Service {
@@ -40,5 +43,36 @@ func (s *Service) Client() *openai.Client {
 	return s.openai
 }
 
-func (s *Service) ProcessImage() {
+// Prompt user for image
+// pass string previously encoded to base64
+func (s *Service) CreateImgRequest(base64Image string) (r openai.ChatCompletionResponse, err error) {
+	client := s.Client()
+	resp, err := client.CreateChatCompletion(
+		context.Background(),
+		openai.ChatCompletionRequest{
+			Model: openai.GPT4o,
+			Messages: []openai.ChatCompletionMessage{
+				{
+					Role:    openai.ChatMessageRoleSystem,
+					Content: "You are an AI assistant capable of analyzing images.",
+				},
+				{
+					Role: openai.ChatMessageRoleUser,
+					MultiContent: []openai.ChatMessagePart{
+						{
+							Type: openai.ChatMessagePartTypeText,
+							Text: "Analyze the following image:",
+						},
+						{
+							Type: openai.ChatMessagePartTypeImageURL,
+							ImageURL: &openai.ChatMessageImageURL{
+								URL: "data:image/jpeg;base64," + base64Image,
+							},
+						},
+					},
+				},
+			},
+		},
+	)
+	return resp, err
 }

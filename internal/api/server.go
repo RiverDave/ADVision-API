@@ -30,7 +30,7 @@ func (s *Server) SetUpRoutes() {
 	})
 
 	s.router.GET("/checkhealth", handlers.CheckHealth)
-	s.router.POST("/upload", handlers.ProcessImage(s.service))
+	s.router.POST("/upload", handlers.ImageHandler(s.service))
 }
 
 func (s *Server) Run() {
