@@ -1,13 +1,14 @@
 package api
 
 import (
-	"net/http"
-
 	"aipi/internal/api/handlers"
 
+	docs "aipi/docs"
 	svc "aipi/internal/service"
 
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type Server struct {
@@ -24,14 +25,15 @@ func NewServer() *Server {
 
 // Register handlers
 func (s *Server) SetUpRoutes() {
-	s.router.GET("/", func(c *gin.Context) {
-		c.IndentedJSON(http.StatusOK, gin.H{
-			"message": "Hello World",
-		})
-	})
+	r := s.router
+	surl := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
 
-	s.router.GET("/checkhealth", handlers.CheckHealth)
-	s.router.POST("/upload", handlers.ImageHandler(s.service))
+	docs.SwaggerInfo.BasePath = "/"
+
+	r.GET("/", handlers.HelloWorld)
+	r.GET("/checkhealth", handlers.CheckHealth)
+	r.POST("/imgtoad", handlers.ImageHandler(s.service))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler, surl))
 }
 
 func (s *Server) Run() {

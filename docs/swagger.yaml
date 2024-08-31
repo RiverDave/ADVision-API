@@ -1,0 +1,77 @@
+basePath: /
+definitions:
+  handlers.ErrorResponse:
+    type: object
+  handlers.MarketingSuggestions:
+    type: object
+info:
+  contact: {}
+  description: prototype for API documentation for image processing and marketing
+    suggestions
+  title: ADVision API Documentation
+  version: "1.0"
+paths:
+  /:
+    get:
+      description: Returns a simple Hello World message
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Hello World endpoint
+      tags:
+      - example
+  /health:
+    get:
+      description: Check the health status of the system
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Check Health endpoint
+      tags:
+      - system
+  /imgtoad:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Generate marketing suggestions based on an uploaded image file
+        or image URL
+      parameters:
+      - description: Image file to analyze
+        in: formData
+        name: image
+        type: file
+      - description: URL of the image to analyze
+        in: formData
+        name: url
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.MarketingSuggestions'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.ErrorResponse'
+      summary: Generate marketing suggestions
+      tags:
+      - marketing
+swagger: "2.0"

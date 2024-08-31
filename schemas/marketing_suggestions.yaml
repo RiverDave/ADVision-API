@@ -1,0 +1,45 @@
+# schemas/marketing_suggestions.yaml
+type: object
+properties:
+  advertisement:
+    type: string
+  call_to_action:
+    type: string
+  alt_text:
+    type: string
+  product_suggestions:
+    type: array
+    items:
+      type: string
+  target_audience_insights:
+    type: string
+  emotional_tone_analysis:
+    type: string
+  seo_keywords:
+    type: array
+    items:
+      type: string
+  social_media_caption:
+    type: string
+  content_ideas:
+    type: array
+    items:
+      type: string
+  hashtags:
+    type: array
+    items:
+      type: string
+  marketing_strategy_tips:
+    type: string
+  image_enhancement_suggestions:
+    type: string
+  cultural_adaptations:
+    type: string
+  legal_ethical_considerations:
+    type: string
+  emojis:
+    type: array
+    items:
+      type: string
+
+
