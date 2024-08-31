@@ -64,7 +64,7 @@ type outputSchema struct {
 
 // Prompt user for image
 // pass string previously encoded to base64
-func (s *Service) CreateImgRequest(base64Image string, objective string) (outputSchema, error) {
+func (s *Service) CreateImgRequest(base64Image string) (outputSchema, error) {
 	client := s.Client()
 
 	// Generate obj to bind
