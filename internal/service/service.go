@@ -7,7 +7,6 @@ import (
 
 	m "aipi/internal/models"
 
-	"github.com/joho/godotenv"
 	"github.com/sashabaranov/go-openai"
 	"github.com/sashabaranov/go-openai/jsonschema"
 )
@@ -19,11 +18,6 @@ type Service struct {
 }
 
 func NewService() *Service {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
 	apikey := os.Getenv("OPEN_AI_API_KEY")
 	client := initOpenAiWrapper(apikey)
 
