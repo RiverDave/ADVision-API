@@ -37,5 +37,5 @@ func (s *Server) SetUpRoutes() {
 
 func (s *Server) Run() {
 	// Ideally set router pass by cfg
-	s.router.Run()
+	s.router.Run(":8080")
 }

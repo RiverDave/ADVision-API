@@ -27,5 +27,5 @@ EXPOSE 8080
 
 # Run the application
 SHELL ["/bin/bash", "-c"]
-ENTRYPOINT make run
-# CMD ["make"", "run"]
+# ENTRYPOINT make run
+CMD ["./tmp/main"]
