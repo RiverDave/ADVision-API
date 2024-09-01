@@ -19,6 +19,9 @@ type Service struct {
 
 func NewService() *Service {
 	apikey := os.Getenv("OPEN_AI_API_KEY")
+	if apikey == "" {
+		log.Fatal("OPEN_AI_API_KEY not set")
+	}
 	client := initOpenAiWrapper(apikey)
 
 	return &Service{

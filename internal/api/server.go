@@ -1,6 +1,8 @@
 package api
 
 import (
+	"log"
+
 	"aipi/internal/api/handlers"
 
 	docs "aipi/docs"
@@ -17,6 +19,7 @@ type Server struct {
 }
 
 func NewServer() *Server {
+	gin.SetMode(gin.ReleaseMode)
 	return &Server{
 		router:  gin.Default(),
 		service: svc.NewService(),
@@ -37,5 +40,6 @@ func (s *Server) SetUpRoutes() {
 
 func (s *Server) Run() {
 	// Ideally set router pass by cfg
+	log.Printf("Server running on port %d\n", 8080)
 	s.router.Run(":8080")
 }
