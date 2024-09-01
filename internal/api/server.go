@@ -40,13 +40,11 @@ func NewServer(conf *cfg.Config) *Server {
 // Register handlers
 func (s *Server) SetUpRoutes() {
 	r := s.router
-	surl := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
-
 	docs.SwaggerInfo.BasePath = "/"
 
 	r.GET("/", handlers.GetDocs)
 	r.POST("/imgtoad", handlers.ImageHandler(s.service))
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler, surl))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 }
 
 func (s *Server) Run() {
