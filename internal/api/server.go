@@ -6,6 +6,7 @@ import (
 	"aipi/internal/api/handlers"
 
 	docs "aipi/docs"
+	cfg "aipi/internal/config"
 	svc "aipi/internal/service"
 
 	"github.com/gin-gonic/gin"
@@ -16,13 +17,23 @@ import (
 type Server struct {
 	router  *gin.Engine
 	service *svc.Service
+	cfg     *cfg.Config
 }
 
-func NewServer() *Server {
-	gin.SetMode(gin.ReleaseMode)
+func NewServer(conf *cfg.Config) *Server {
+	if conf == nil {
+		panic("Couldn't parse config file. Exiting...")
+	}
+
+	if conf.Environment() == "prod" {
+		gin.SetMode(gin.ReleaseMode)
+		log.Println("Running in production mode")
+	}
+
 	return &Server{
 		router:  gin.Default(),
 		service: svc.NewService(),
+		cfg:     conf,
 	}
 }
 

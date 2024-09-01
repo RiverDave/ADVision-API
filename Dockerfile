@@ -20,7 +20,7 @@ RUN go install github.com/swaggo/swag/cmd/swag
 
 # Build the application
 # RUN go build -o main .
-RUN make build
+RUN make build-prod
 
 # Expose port 8080 for the Gin server
 EXPOSE 8080

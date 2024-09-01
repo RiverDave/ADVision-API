@@ -8,6 +8,12 @@ build:
 	@go build -o tmp/main cmd/api/main.go
 	@swag init -g ./cmd/api/main.go -d ./,./internal/models
 
+# Build the application for production
+build-prod:
+	@echo "Building for production..."
+	@GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o tmp/main cmd/api/main.go
+	@swag init -g ./cmd/api/main.go -d ./,./internal/models
+
 # Run the application
 run:
 	@go run cmd/api/main.go
