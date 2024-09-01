@@ -1,46 +1,69 @@
 basePath: /
 definitions:
-  handlers.ErrorResponse:
+  aipi_internal_models.MarketingSuggestions:
+    properties:
+      advertisement:
+        type: string
+      alt_text:
+        type: string
+      call_to_action:
+        type: string
+      content_ideas:
+        items:
+          type: string
+        type: array
+      cultural_adaptations:
+        type: string
+      emojis:
+        items:
+          type: string
+        type: array
+      emotional_tone_analysis:
+        type: string
+      hashtags:
+        items:
+          type: string
+        type: array
+      image_enhancement_suggestions:
+        type: string
+      legal_ethical_considerations:
+        type: string
+      marketing_strategy_tips:
+        type: string
+      product_suggestions:
+        items:
+          type: string
+        type: array
+      seo_keywords:
+        items:
+          type: string
+        type: array
+      social_media_caption:
+        type: string
+      target_audience_insights:
+        type: string
     type: object
-  handlers.MarketingSuggestions:
+  handlers.ErrorResponse:
+    properties:
+      error:
+        type: string
     type: object
 info:
   contact: {}
-  description: prototype for API documentation for image processing and marketing
+  description: Prototype for API documentation for image processing and marketing
     suggestions
   title: ADVision API Documentation
   version: "1.0"
 paths:
   /:
     get:
-      description: Returns a simple Hello World message
-      produces:
-      - application/json
+      description: Root endpoint that redirects to the Swagger documentation
       responses:
-        "200":
-          description: OK
-          schema:
-            additionalProperties:
-              type: string
-            type: object
-      summary: Hello World endpoint
+        "301":
+          description: Moved Permanently
+      summary: Root endpoint
       tags:
-      - example
-  /health:
-    get:
-      description: Check the health status of the system
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            additionalProperties:
-              type: string
-            type: object
-      summary: Check Health endpoint
-      tags:
-      - system
+      - root
   /imgtoad:
     post:
       consumes:
@@ -62,7 +85,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/handlers.MarketingSuggestions'
+            $ref: '#/definitions/aipi_internal_models.MarketingSuggestions'
         "400":
           description: Bad Request
           schema:

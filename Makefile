@@ -6,7 +6,7 @@ all: build
 build:
 	@echo "Building..."
 	@go build -o tmp/main cmd/api/main.go
-	@swag init -g ./cmd/api/main.go -o docs/
+	@swag init -g ./cmd/api/main.go -d ./,./internal/models
 
 # Run the application
 run:

@@ -1,5 +1,0 @@
-# schemas/error_response.yaml
-type: object
-properties:
-  error:
-    type: string

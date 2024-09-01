@@ -17,46 +17,14 @@ const docTemplate = `{
     "paths": {
         "/": {
             "get": {
-                "description": "Returns a simple Hello World message",
-                "produces": [
-                    "application/json"
-                ],
+                "description": "Root endpoint that redirects to the Swagger documentation",
                 "tags": [
-                    "example"
+                    "root"
                 ],
-                "summary": "Hello World endpoint",
+                "summary": "Root endpoint",
                 "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/health": {
-            "get": {
-                "description": "Check the health status of the system",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "system"
-                ],
-                "summary": "Check Health endpoint",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
+                    "301": {
+                        "description": "Moved Permanently"
                     }
                 }
             }
@@ -92,7 +60,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handlers.MarketingSuggestions"
+                            "$ref": "#/definitions/aipi_internal_models.MarketingSuggestions"
                         }
                     },
                     "400": {
@@ -112,11 +80,78 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "handlers.ErrorResponse": {
-            "type": "object"
+        "aipi_internal_models.MarketingSuggestions": {
+            "type": "object",
+            "properties": {
+                "advertisement": {
+                    "type": "string"
+                },
+                "alt_text": {
+                    "type": "string"
+                },
+                "call_to_action": {
+                    "type": "string"
+                },
+                "content_ideas": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "cultural_adaptations": {
+                    "type": "string"
+                },
+                "emojis": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "emotional_tone_analysis": {
+                    "type": "string"
+                },
+                "hashtags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "image_enhancement_suggestions": {
+                    "type": "string"
+                },
+                "legal_ethical_considerations": {
+                    "type": "string"
+                },
+                "marketing_strategy_tips": {
+                    "type": "string"
+                },
+                "product_suggestions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "seo_keywords": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "social_media_caption": {
+                    "type": "string"
+                },
+                "target_audience_insights": {
+                    "type": "string"
+                }
+            }
         },
-        "handlers.MarketingSuggestions": {
-            "type": "object"
+        "handlers.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
         }
     }
 }`
@@ -128,7 +163,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "ADVision API Documentation",
-	Description:      "prototype for API documentation for image processing and marketing suggestions",
+	Description:      "Prototype for API documentation for image processing and marketing suggestions",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

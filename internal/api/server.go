@@ -30,8 +30,7 @@ func (s *Server) SetUpRoutes() {
 
 	docs.SwaggerInfo.BasePath = "/"
 
-	r.GET("/", handlers.HelloWorld)
-	r.GET("/checkhealth", handlers.CheckHealth)
+	r.GET("/", handlers.GetDocs)
 	r.POST("/imgtoad", handlers.ImageHandler(s.service))
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler, surl))
 }

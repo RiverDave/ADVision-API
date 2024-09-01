@@ -6,54 +6,29 @@ import (
 	"log"
 	"net/http"
 
+	"aipi/internal/models"
+
 	svc "aipi/internal/service"
 
 	"github.com/gin-gonic/gin"
 )
 
-// @title API Documentation
-// @version 1.0
-// @description API documentation for image processing and marketing suggestions
-// @BasePath /
-
-// HelloWorld godoc
-// @Summary Hello World endpoint
-// @Description Returns a simple Hello World message
-// @Tags example
-// @Produce json
-// @Success 200 {object} map[string]string
+// @Summary Root endpoint
+// @Description Root endpoint that redirects to the Swagger documentation
+// @Tags root
+// @Success 301
 // @Router / [get]
-func HelloWorld(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, gin.H{
-		"message": "Hello World",
-	})
-}
-
-// CheckHealth godoc
-// @Summary Check Health endpoint
-// @Description Check the health status of the system
-// @Tags system
-// @Produce json
-// @Success 200 {object} map[string]string
-// @Router /health [get]
-func CheckHealth(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, gin.H{
-		"message": "Systems are doing okay",
-	})
-}
-
-// MarketingSuggestions represents the response from the image processing service
-// swagger:model
-type MarketingSuggestions struct {
-	// swagger:allOf
-	// $ref: "./schemas/marketing_suggestions.yaml"
+func GetDocs(c *gin.Context) {
+	c.Redirect(http.StatusMovedPermanently, "/swagger/index.html")
+	// c.IndentedJSON(http.StatusOK, gin.H{
+	// 	"message": "Hello World",
+	// })
 }
 
 // ErrorResponse represents an error response
 // swagger:model
 type ErrorResponse struct {
-	// swagger:allOf
-	// $ref: "./schemas/error_response.yaml"
+	Error string `json:"error"`
 }
 
 // ImageHandler godoc
@@ -64,7 +39,7 @@ type ErrorResponse struct {
 // @Produce json
 // @Param image formData file false "Image file to analyze"
 // @Param url formData string false "URL of the image to analyze"
-// @Success 200 {object} MarketingSuggestions
+// @Success 200 {object} models.MarketingSuggestions
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /imgtoad [post]
@@ -123,13 +98,8 @@ func ImageHandler(svc *svc.Service) gin.HandlerFunc {
 		encImg := base64.StdEncoding.EncodeToString(imageData)
 
 		// Process the image
-		res, err := svc.CreateImgRequest(encImg)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{
-				"error": err.Error(),
-			})
-			return
-		}
+		// Dont omit type to avoid go deleting imports(used by swagger)
+		var res models.MarketingSuggestions = svc.CreateImgRequest(encImg)
 
 		c.JSON(http.StatusOK, res)
 	}
