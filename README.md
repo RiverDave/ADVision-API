@@ -3,7 +3,7 @@
 ## Introduction
 
 ADVision is a REST service capable of converting a given image into detailed marketing suggestions. This tool leverages advanced image recognition powered by the OpenAI API to analyze visual content and provide actionable insights for marketing strategies.
-As of now, You can try it on [the website]().
+As of now, You can try it on [the website](https://ad-vision-site.vercel.app/).
 
 ## How it works
 
@@ -58,7 +58,7 @@ It uses the OpenAI API to analyze the content of Query parameter and generates a
 
 ## Usage
 
-The root endpoint `/` redirects to a swagger documentation page where you can test the API. Try it directly from [here]()
+The root endpoint `/` redirects to a swagger documentation page where you can test the API.
 
 ## Installation
 
