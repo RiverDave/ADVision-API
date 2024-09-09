@@ -94,9 +94,9 @@ make run
 ### Tools used
 
 - Go 1.23.0
-- [Gin](github.com/gin-gonic/gin) (Routing)
-- [Swaggo](github.com/swaggo/swag) (Swagger Documentation)
-- [go-openai](github.com/sashabaranov/go-openai) (Wrapper over the OpenAI API)
+- [Gin](https://github.com/gin-gonic/gin) (Routing)
+- [Swaggo](https://github.com/swaggo/swag) (Swagger Documentation)
+- [go-openai](https://github.com/sashabaranov/go-openai) (Wrapper over the OpenAI API)
 
 ### Implementation Status
 
